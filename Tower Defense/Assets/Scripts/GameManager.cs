@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             endGame();
         }
     }
-    private void togglePauseGame()
+    public void togglePauseGame()
     {
         pauseUI.SetActive(!pauseUI.activeSelf);
         if(pauseUI.activeSelf)
