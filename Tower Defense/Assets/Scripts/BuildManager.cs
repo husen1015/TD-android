@@ -68,6 +68,7 @@ public class BuildManager : MonoBehaviour
     }
     public void DeselectPlatform()
     {
+        selectedPlat.Deselect();
         this.selectedPlat = null;
         turretUI.Hide();
         buildingUI.Hide();

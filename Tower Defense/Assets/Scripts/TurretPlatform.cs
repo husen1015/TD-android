@@ -56,6 +56,7 @@ public class TurretPlatform : MonoBehaviour
         //}
         Debug.Log("selecting plat");
         buildManager.SelectPlatform(this);
+        platformRenderer.material.color = hoverColor;
     }
 
     
@@ -117,6 +118,10 @@ public class TurretPlatform : MonoBehaviour
 
         platformRenderer.material.color = originalColor;
     }
+    public void Deselect()
+    {
+        platformRenderer.material.color = originalColor;
+    }
 
-    
+
 }
