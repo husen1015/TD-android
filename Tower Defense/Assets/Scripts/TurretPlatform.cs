@@ -30,30 +30,32 @@ public class TurretPlatform : MonoBehaviour
         //Debug.Log( $"can build? {buildManager.CanBuild}");
         //Debug.Log($"curr turret? {currTurret}");
 
-        //avoid UI elements that are in the way
-        if (EventSystem.current.IsPointerOverGameObject())
+        //avoid UI elements that are in the way OR if there is already a selected platform return
+        if ((buildManager.CurrPlatform != null && buildManager.CurrPlatform != this) || EventSystem.current.IsPointerOverGameObject())
         {
             return;
-        } 
-        if (buildManager.CanBuild)
-        {
-
-            if (currTurret != null)
-            {
-                Debug.Log("slot already occupied");
-            }else
-            {
-                //build a turret
-                buildManager.BuildTurret(this);
-
-                //set the curr turret blueprint
-                currTurretBlueprint = buildManager.CurrTurr;
-            }
         }
-        else if (currTurret != null)// if user doesnt want to build a new turret i.e. selecting the platform instead if it has an existing turret
-        {
-            buildManager.SelectPlatform(this);
-        }
+        //if (buildManager.CanBuild)
+        //{
+
+        //    if (currTurret != null)
+        //    {
+        //        Debug.Log("slot already occupied");
+        //    }else
+        //    {
+        //        //build a turret
+        //        buildManager.BuildTurret(this);
+
+        //        //set the curr turret blueprint
+        //        currTurretBlueprint = buildManager.CurrTurr;
+        //    }
+        //}
+        //else if (currTurret != null)// if user doesnt want to build a new turret i.e. selecting the platform instead if it has an existing turret
+        //{
+        //    buildManager.SelectPlatform(this);
+        //}
+        Debug.Log("selecting plat");
+        buildManager.SelectPlatform(this);
     }
 
     
@@ -115,4 +117,6 @@ public class TurretPlatform : MonoBehaviour
 
         platformRenderer.material.color = originalColor;
     }
+
+    
 }

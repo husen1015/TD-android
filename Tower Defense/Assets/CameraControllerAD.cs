@@ -26,23 +26,28 @@ public class CameraControllerAD : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //panning
-        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        //pannin0
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
             Vector2 touchDeltaPos = Input.GetTouch(0).deltaPosition;
+            Debug.Log(touchDeltaPos);
             //Vector3 pan = cam.ScreenToWorldPoint(new Vector3(-touchDeltaPos.x, 0, -touchDeltaPos.y));
-            //transform.Translate(pan*panSpeed * Time.deltaTime);
-            transform.Translate(-touchDeltaPos.x * panSpeed, 0, -touchDeltaPos.y * panSpeed);
-
+            //transform.Translate(pan * panSpeed);
+            transform.Translate(-touchDeltaPos.x * panSpeed, -touchDeltaPos.y * panSpeed, 0);
+            
             //transform.position = new Vector3(
             //    Mathf.Clamp(transform.position.x, -9.50f, 40f),
             //    Mathf.Clamp(transform.position.y, 9.3f, 16f),
             //    Mathf.Clamp(transform.position.z, 22f, 55f));
 
             transform.position = new Vector3(
-                Mathf.Clamp(transform.position.x, -9.50f, 40f),
+                Mathf.Clamp(transform.position.x, 6f, 30f),
                 currHeight,
-                Mathf.Clamp(transform.position.z, -35f, 35f));
+            Mathf.Clamp(transform.position.z, -15f, 70f));
+            //        transform.position = new Vector3(
+            //transform.position.x,
+            //currHeight,
+            //transform.position.z);
         }
         //zooming
         else if (Input.touchCount == 2)

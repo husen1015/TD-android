@@ -10,6 +10,7 @@ public class BuildManager : MonoBehaviour
     public static BuildManager Instance { get; private set; }
     public GameObject buildEffect;
     public TurretUI turretUI;
+    public BuildingUI buildingUI;
     //public GameObject standardTurret;
     //public GameObject MissileTurret;
     private TurretBlueprint turretToBuild;
@@ -31,6 +32,8 @@ public class BuildManager : MonoBehaviour
         gameManager= GameManager.Instance;
     }
     public TurretBlueprint CurrTurr { get { return turretToBuild; } }
+    public TurretPlatform CurrPlatform { get { return selectedPlat; } }
+
     public bool CanBuild { get {return turretToBuild!=null && turretToBuild.prefab!= null; } } //getter property
     public bool hasMoney { get { return gameManager.Balance > turretToBuild.cost; } } //getter property
 
@@ -41,6 +44,7 @@ public class BuildManager : MonoBehaviour
 
         this.turretToBuild = turretToBuild;
         turretUI.Hide();
+        buildingUI.Hide();
         //selectedPlat = null;
     }
     public void SelectPlatform(TurretPlatform plat)
@@ -52,13 +56,21 @@ public class BuildManager : MonoBehaviour
             return;
         }
         this.selectedPlat = plat;
-        turretUI.SetTarget(plat);
+        if (plat.currTurret != null)
+        {
+            turretUI.SetTarget(plat);
+        }
+        else
+        {
+            buildingUI.SetTarget(plat);
+        }
         //turretToBuild = null;
     }
     public void DeselectPlatform()
     {
         this.selectedPlat = null;
         turretUI.Hide();
+        buildingUI.Hide();
     }
     public void Unselect()
     {
